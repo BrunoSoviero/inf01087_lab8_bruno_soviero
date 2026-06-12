@@ -1,0 +1,10 @@
+INF01087 - LAB 8 - Bruno Soviero
+Parte 2:
+Primeiro prompt:
+"Me explique o que é deadlock na computação"
+Segundo Prompt:
+"Em umas das minhas cadeiras preciso apresentar o conceito de deadlock, em alguns paragrafos, para estudantes que ainda são iniciantes na computação e de uma forma que eles possam entender facilmente"
+
+Parte 3:
+"Preciso que você faça um programa que calcula fatoriais"
+"Preciso que você faça um programa que calcula fatoriais com exemplos de entrada e saída, tratamentos de erro e as restrições de implementação dele"
