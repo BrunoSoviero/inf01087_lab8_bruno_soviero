@@ -3,6 +3,7 @@ LLM escolhida: Gemini
 Data de uso: 12/06/2007
 Versão gratuita
 Ferramenta possuí acesso a internet
+Para todas as respostas foram utilizadas as especificações mencionadas acima.
 
 Parte 2:
 Primeiro prompt: "Um **deadlock** (ou *impasse*) é uma situação no sistema operacional que ocorre quando dois ou mais processos ficam permanentemente travados porque cada um está esperando por um recurso que está sendo usado pelo outro.
@@ -272,3 +273,11 @@ USO RESPONSÁVEL DE LLMs:
 3 - As LLMs podem ser utilizadas no aprendizado de forma consciente e crítica, avaliando que ela retorna uma resposta pronta e não desenvolve propriamente uma reflexão de como chegar nela.
 4 - Elas podem atrapalhar ao dar respostas prontas e evitar a reflexão do caminho para chegar no resultado.
 5 - Significa que ela será um dos apoios para o aprendizado, auxiliando no raciocínio e não devolvendo respostas imediatamente prontas para que o usuário nao se torne tão dependente da ferramenta.
+
+
+Reflexão sobre uso de IA generativa:
+1- O uso deve ser de forma consciente e com prompts completos, evitando ambiguidades.
+2 - A qualidade do prompt afeta a forma como os resultados são estruturados, a completude deles e o que aquela resposta visa.
+3 - A ferramenta foi mais útil na criação de códigos. 
+4- Em todas as situações foi necessário verificar as respostas.
+5 - Utilizaria de forma que auxilie meu aprendizado e evite minha robotizção na formação do pensamento. Pois ela é muito útil se utilizada da forma correta.
