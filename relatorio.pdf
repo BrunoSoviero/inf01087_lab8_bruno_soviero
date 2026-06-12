@@ -265,3 +265,10 @@ Se o seu objetivo acadêmico exigir o cálculo de fatoriais maiores (como $50!$ 
 3- Pela verificação do código, nota-se que ela só usa as funções base da biblioteca stdio.h, e o negativo foi fazendo o teste no CodeBlocks
 4- A LLM demonstrou excesso de confiança na verificação de todos os casos possíveis de erro para o programa.
 5 - O prompt poderia ser melhorado especificando qual erro eu queria que ele encontrasse no uso, qual linguagem utilizar ( ele assumiu C), pedir em formato diferente as entradas e saidas do programa.
+
+USO RESPONSÁVEL DE LLMs:
+1 - Não devemos copiar respotas sem revisão pois, se houver o prompt errado, ela pode dar uma resposta incorreta, incompleta, ou de uma foram diferente da que o usuário imaginava.
+2 - é importante informar os prompts utilizados para verificar o que se esperava como resposta a partir do que foi digitado e para prever possíveis erros pela falta de inclusão de informações
+3 - As LLMs podem ser utilizadas no aprendizado de forma consciente e crítica, avaliando que ela retorna uma resposta pronta e não desenvolve propriamente uma reflexão de como chegar nela.
+4 - Elas podem atrapalhar ao dar respostas prontas e evitar a reflexão do caminho para chegar no resultado.
+5 - Significa que ela será um dos apoios para o aprendizado, auxiliando no raciocínio e não devolvendo respostas imediatamente prontas para que o usuário nao se torne tão dependente da ferramenta.
