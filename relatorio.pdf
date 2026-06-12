@@ -1,0 +1,267 @@
+LAB 08 - INF01087 - Bruno Forneck Soviero
+LLM escolhida: Gemini
+Data de uso: 12/06/2007
+Versão gratuita
+Ferramenta possuí acesso a internet
+
+Parte 2:
+Primeiro prompt: "Um **deadlock** (ou *impasse*) é uma situação no sistema operacional que ocorre quando dois ou mais processos ficam permanentemente travados porque cada um está esperando por um recurso que está sendo usado pelo outro.
+Imagine o deadlock como um **engasgo mútuo**: ninguém avança porque todo mundo está esperando alguém liberar o caminho.
+## O Exemplo Clássico (O Jantar dos Filósofos ou Ponte Estreita)
+Para entender de forma simples, imagine uma ponte extremamente estreita onde só passa um carro por vez.
+1. Um carro vem da **esquerda** e entra na ponte.
+2. Outro carro vem da **direita** e entra na ponte ao mesmo tempo.
+3. Eles se encontram no meio.
+Nenhum dos dois consegue passar. Se nenhum deles aceitar dar a ré (ceder o recurso), eles ficarão parados ali para sempre. Isso é um deadlock.
+No mundo do software, troque os carros por **Processos (A e B)** e a ponte por **Recursos (como um arquivo ou o banco de dados)**:
+* O **Processo A** está com o **Recurso 1** bloqueado e precisa do **Recurso 2**.
+* O **Processo B** está com o **Recurso 2** bloqueado e precisa do **Recurso 1**.
+* Resultado: Ambos ficam esperando indefinidamente.
+## As 4 Condições de Coffman
+Para que um deadlock aconteça, **todas** as quatro condições abaixo precisam ocorrer ao mesmo tempo. Se você quebrar pelo menos uma delas, o deadlock é evitado:
+1. **Exclusão Mútua:** O recurso só pode ser usado por um processo de cada vez (ex: uma impressora não pode imprimir dois documentos de computadores diferentes misturados na mesma folha).
+2. **Posse e Espera (Hold and Wait):** Um processo já possui um recurso garantido, mas está esperando para conseguir outro que precisa.
+3. **Não Preempção:** Um recurso não pode ser "roubado" de um processo à força. O sistema operacional não pode simplesmente arrancar o arquivo da mão do Processo A; ele precisa esperar o Processo A liberá-lo voluntariamente.
+4. **Espera Circular:** O Processo A espera pelo Processo B, que espera pelo Processo C, que por sua vez está esperando pelo Processo A, fechando um ciclo de dependência.
+## Como os Sistemas Operacionais Lido com Isso?
+Existem três abordagens principais para gerenciar esse problema:
+* **Ignorar (A Abordagem Avestruz):** O sistema finge que o problema não existe. Se acontecer, o sistema simplesmente trava, e o usuário precisa reiniciar a máquina ou derrubar o programa. O Windows, o Linux e o macOS usam muito essa abordagem para fins de performance, já que detectar deadlocks a cada segundo consome muito processamento.
+* **Detecção e Recuperação:** O sistema roda algoritmos periodicamente para ver se há um ciclo de espera. Se encontrar, ele toma uma atitude drástica, como encerrar um dos processos à força (*kill*) ou forçar o processo a liberar o recurso.
+* **Prevenção:** O sistema é desenhado de forma estrita para garantir que uma das 4 condições de Coffman nunca aconteça. Por exemplo, exigir que um processo peça todos os recursos de que precisa logo no início, ou definir uma ordem exata para acessar os recursos (todo mundo precisa pegar o Recurso 1 antes de poder pedir o Recurso 2)."
+
+Segundo prompt: "Para explicar **deadlock** para quem está começando, o segredo é tirar o foco dos termos técnicos e usar uma metáfora visual e cotidiana. No início da computação, a lógica abstrata faz muito mais sentido quando associada a um problema do mundo real.
+Aqui está uma sugestão de texto explicativo dividida em três pequenos parágrafos, ideal para uma apresentação rápida ou slide:
+Imagine um cruzamento de trânsito em formato de "X" onde quatro carros chegam exatamente ao mesmo tempo, cada um vindo de uma direção diferente. Todos avançam um pouco e param no meio do cruzamento. Agora, o carro A não pode andar porque o carro B está na frente dele; o carro B está travado pelo carro C; o carro C pelo D; e o D pelo A. Nenhum motorista consegue ir para frente e nenhum quer dar a ré. O trânsito parou por completo. Isso é o que chamamos de **deadlock** (ou impasse).
+No mundo dos computadores, troque os carros por programas e o cruzamento por recursos do sistema, como a memória ou um arquivo. Um deadlock acontece quando o **Programa 1** está usando a *Impressora* e precisa do *Scanner* para terminar sua tarefa. Ao mesmo tempo, o **Programa 2** pegou o *Scanner* e está esperando a *Impressora* liberar. Como nenhum dos programas larga o que já tem na mão e ambos precisam do recurso do outro para continuar, eles ficam congelados para sempre, esperando um pelo outro.
+Para que esse "engasgo" aconteça, o sistema precisa permitir que programas reservem recursos exclusivamente para si e fiquem esperando por outros por tempo indeterminado. Como os computadores processam milhões de dados por segundo, os sistemas operacionais precisam usar estratégias inteligentes para evitar que essas situações aconteçam — seja definindo regras rígidas de quem pega o quê primeiro, ou, em casos extremos, forçando um dos programas a fechar para que o outro possa finalmente seguir caminho.
+**Uma dica extra para a sua apresentação:** Se puder, projete uma imagem simples desse cruzamento travado ou desenhe no quadro o ciclo dos dois programas e os recursos (duas setas apontando em direções opostas). Isso faz o conceito "clicar" na cabeça de estudantes iniciantes instantaneamente.
+Ficou claro esse fluxo para a sua explicação, ou quer ajustar o tom de alguma parte?"
+
+Resultado: O primeiro prompt generalizou muito mais a resposta ao problema, entregou a resposta em tópicos, cada um entregando uma abordagem diferente, enquanto o segundo prompt entregou um texto muito melhor estruturado, conciso e fácil de entender, ainda que ambos tenham sido explicados sem usar termos complexos.
+
+Parte 3:
+prompt: "Preciso que voce faça um programa que calcula fatoriais"
+codigo gerado:" Aqui está um exemplo clássico de programa para calcular o fatorial de um número. Como você está estudando conceitos de programação, trouxe duas formas muito comuns de resolver esse problema em **C**: uma usando **iteração** (um laço `for` simples) e outra usando **recursão** (uma função que chama a si mesma).
+
+O fatorial de um número $n$ (representado por $n!$) é a multiplicação de todos os números inteiros positivos de 1 até $n$. Por definição, $0! = 1$.
+
+### Código em C (Duas abordagens)
+
+```c
+#include <stdio.h>
+
+// Abordagem 1: Usando Iteração (Laço de repetição)
+long long fatorial_iterativo(int n) {
+    long long resultado = 1;
+    
+    for (int i = 1; i <= n; i++) {
+        resultado *= i; // Multiplica o resultado pelo número atual
+    }
+    
+    return resultado;
+}
+
+// Abordagem 2: Usando Recursão (A função chama a si mesma)
+long long fatorial_recursivo(int n) {
+    // Caso base: o fatorial de 0 ou 1 é sempre 1
+    if (n == 0 || n == 1) {
+        return 1;
+    }
+    // Caso recursivo: n! = n * (n - 1)!
+    return n * fatorial_recursivo(n - 1);
+}
+
+int main() {
+    int numero;
+    
+    printf("Digite um numero inteiro positivo: ");
+    if (scanf("%d", &numero) != 1 || numero < 0) {
+        printf("Por favor, insira um numero inteiro valido e maior ou igual a zero.\n");
+        return 1;
+    }
+    
+    // Calculando das duas formas
+    long long resultado_for = fatorial_iterativo(numero);
+    long long resultado_rec = fatorial_recursivo(numero);
+    
+    printf("\n--- Resultados ---\n");
+    printf("Iterativo (com 'for'): %d! = %lld\n", numero, resultado_for);
+    printf("Recursivo (funcao):    %d! = %lld\n", numero, resultado_rec);
+    
+    return 0;
+}
+
+```
+
+---
+
+### Detalhes importantes do código:
+* **Por que `long long`?** O cálculo de fatorial cresce muito rápido (por exemplo, $15!$ já é $1.307.674.368.000$). O tipo comum `int` estoura a sua capacidade máxima logo no $13!$. Usando `long long`, garantimos que o programa consiga calcular números maiores (até perto de $20!$) sem quebrar o limite de bits.
+* **A lógica da Recursão:** Na função recursiva, o computador cria uma "pilha" de multiplicações. Se você pedir o fatorial de 4, ele calcula assim:
+$$4 \times \text{fatorial}(3)$$
+$$4 \times (3 \times \text{fatorial}(2))$$
+$$4 \times (3 \times (2 \times \text{fatorial}(1)))$$
+$$4 \times 3 \times 2 \times 1 = 24$$
+Se você precisar apresentar esse código ou adaptá-lo para outra lógica de estudos (como criar uma versão que salve os resultados em um array ou tabela), me avise!"
+
+Explicação: Sem pedir, o Gemini gerou dois códigos diferentes para resolver o problema, ambos devidamente documentados e explicando cada linha de código.
+O primeiro usa iteração dentro de um for que vai multiplicando 1 até o numero necessário.
+O segundo utiliza recursão retornando n * a chamada a funcao de n - 1 até chegar em 1
+
+Testes:
+Digite um numero inteiro positivo: 10
+
+--- Resultados ---
+Iterativo (com 'for'): 10! = 3628800
+Recursivo (funcao):    10! = 3628800
+
+Process returned 0 (0x0)   execution time : 3.031 s
+Press any key to continue.
+
+Digite um numero inteiro positivo: 125
+
+--- Resultados ---
+Iterativo (com 'for'): 125! = 0
+Recursivo (funcao):    125! = 0
+
+Process returned 0 (0x0)   execution time : 2.844 s
+Press any key to continue.
+
+Análise: O código gerado, apesar de utilizar long float para números maiores, nao restringe que o 100! seja usado e retorna 0 como resposta, ademais, o código estava bem documentado e estruturado
+
+Parte 4: 
+Comparação: O novo código foi reavaliado pelo Gemini para ser efetivamente usado em sistemas de engenharia, verificando, no código, se o usuário realmente digitou um número positivo possível de ser armazenado pelo computador e avalianndo 5 casos de utilização diferentes.
+
+Parte  5:
+Resposta utilizada: Parte 4
+"Para construir um programa de cálculo de fatorial robusto em **C**, precisamos ir além da lógica matemática básica e pensar em cenários reais de engenharia de software: o que acontece se o usuário digitar uma letra? E se ele digitar um número negativo? E o que acontece se o número for tão grande que o computador não consiga armazenar o resultado?
+
+Abaixo está a implementação completa com tratamento de erros rigoroso, seguida pelos exemplos de teste e pelas restrições físicas do código.
+
+---
+
+### Código Completo em C
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definição do limite teórico para o tipo 'unsigned long long' em fatorial
+#define LIMITE_MAX_FATORIAL 20
+
+/**
+ * Calcula o fatorial de forma iterativa.
+ * Usa 'unsigned long long' para garantir o maior espaço de memória possível para inteiros.
+ */
+unsigned long long calcular_fatorial(int n) {
+    unsigned long long resultado = 1;
+    for (int i = 1; i <= n; i++) {
+        resultado *= i;
+    }
+    return resultado;
+}
+
+int main() {
+    char entrada[50];
+    int numero;
+    char caractere_extra;
+
+    printf("=== Calculadora de Fatorial Garantida ===\n");
+    printf("Digite um numero inteiro entre 0 e %d: ", LIMITE_MAX_FATORIAL);
+
+    // TRATAMENTO DE ERRO 1: Captura a entrada como string para evitar quebras do scanf
+    if (fgets(entrada, sizeof(entrada), stdin) == NULL) {
+        printf("Erro crítico ao ler a entrada do teclado.\n");
+        return 1;
+    }
+
+    // TRATAMENTO DE ERRO 2: Valida se a entrada é estritamente um número inteiro
+    // sscanf tenta ler um inteiro (%d). Se sobrarem caracteres (caractere_extra), a entrada é inválida.
+    int itens_lidos = sscanf(entrada, "%d %c", &numero, &caractere_extra);
+
+    if (itens_lidos != 1) {
+        printf("[ERRO]: Entrada invalida! Voce deve digitar apenas um numero inteiro.\n");
+        return 1;
+    }
+
+    // TRATAMENTO DE ERRO 3: Validação de Regra de Negócio (Número Negativo)
+    if (numero < 0) {
+        printf("[ERRO]: Nao existe fatorial de numero negativo (%d!).\n", numero);
+        return 1;
+    }
+
+    // TRATAMENTO DE ERRO 4: Restrição de Estouro de Memória (Overflow)
+    if (numero > LIMITE_MAX_FATORIAL) {
+        printf("[ERRO]: O numero %d e muito grande.\n", numero);
+        printf("        Para evitar estouro de memoria (overflow), o limite maximo permitido e %d.\n", LIMITE_MAX_FATORIAL);
+        return 1;
+    }
+
+    // Execução segura caso passe por todas as validações
+    unsigned long long resultado = calcular_fatorial(numero);
+    printf("\n[SUCESSO]: %d! = %llu\n", numero, resultado);
+
+    return 0;
+}
+
+```
+
+---
+
+### Exemplos de Entrada e Saída
+
+#### Cenário 1: Sucesso (Caso Comum)
+
+* **Entrada:** `5`
+* **Saída:** `[SUCESSO]: 5! = 120`
+
+#### Cenário 2: Sucesso (Caso Limite Mínimo)
+
+* **Entrada:** `0`
+* **Saída:** `[SUCESSO]: 0! = 1` *(Por definição matemática, $0! = 1$)*
+
+#### Cenário 3: Erro de Tipo (Letras ou Símbolos)
+
+* **Entrada:** `abc` ou `12a`
+* **Saída:** `[ERRO]: Entrada invalida! Voce deve digitar apenas um numero inteiro.`
+
+#### Cenário 4: Erro de Regra Matemática (Negativos)
+
+* **Entrada:** `-7`
+* **Saída:** `[ERRO]: Nao existe fatorial de numero negativo (-7!).`
+
+#### Cenário 5: Erro de Overflow (Estouro de Capacidade)
+
+* **Entrada:** `21`
+* **Saída:** ```text
+[ERRO]: O numero 21 e muito grande.
+Para evitar estouro de memoria (overflow), o limite maximo permitido e 20.
+```
+
+
+```
+
+
+
+---
+
+### Restrições de Implementação
+
+Ao apresentar ou analisar este código, existem três grandes restrições que precisam ser explicadas:
+
+1. **A Restrição do Tipo de Dado (Estouro de Bits):**
+O fatorial cresce de forma exponencial/fatorial. O maior tipo de inteiro primitivo em C é o `unsigned long long` (geralmente de 64 bits), cujo valor máximo é $18.446.744.073.709.551.615$.
+* $20! = 2.432.902.008.176.640.000$ (cabe nos 64 bits).
+* $21! = 51.090.942.171.709.440.000$ (**estoura** o limite). Se tentássemos calcular $21!$, o número daria "a volta" na memória e retornaria um valor completamente errado e aleatório. Por isso, travamos o limite estritamente em `20`.
+
+
+2. **A Fragilidade do `scanf` tradicional:**
+Se usássemos apenas `scanf("%d", &numero)`, e o usuário digitasse "banana", o `scanf` falharia, deixaria a palavra "banana" no buffer do teclado e, se o programa estivesse em um laço, entraria em loop infinito. A estratégia de ler a linha inteira com `fgets` e depois processar com `sscanf` blinda o programa contra isso.
+3. **Restrição de Escopo Espacial/Precisão:**
+Se o seu objetivo acadêmico exigir o cálculo de fatoriais maiores (como $50!$ ou $100!$), esta implementação com tipos primitivos se torna obsoleta. Para quebrar essa restrição, seria necessário alterar a estrutura do programa para usar vetores (onde cada posição do array guarda um dígito do número) ou utilizar bibliotecas externas de precisão arbitrária, como a `GMP` (GNU Multiple Precision Arithmetic Library)."
+
+1- A resposta está quase inteiramente correta de acordo com o prompt que eu escrevi.
+2- Ele incluiu a biblioteca stdlib desnecessariamente e na parte matemática ele esvreve -n!, mas nao existem negativos fatoriais
+3- Pela verificação do código, nota-se que ela só usa as funções base da biblioteca stdio.h, e o negativo foi fazendo o teste no CodeBlocks
+4- A LLM demonstrou excesso de confiança na verificação de todos os casos possíveis de erro para o programa.
+5 - O prompt poderia ser melhorado especificando qual erro eu queria que ele encontrasse no uso, qual linguagem utilizar ( ele assumiu C), pedir em formato diferente as entradas e saidas do programa.
